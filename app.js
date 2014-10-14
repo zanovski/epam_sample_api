@@ -38,13 +38,3 @@ process.on('uncaughtException', function(err) {
     console.log(err);
     console.log('>>>>> uncaughtException >>>>>>');
 });
-
-/**
- * Хак для бесплатного аккаунта на хероку. Предотвращает засыпание процесса каждые 50-60 минут
- */
-setInterval(function() {
-    require('restler').get('http://restik.herokuapp.com/post')
-        .on('complete', function() {
-            console.log(arguments);
-        })
-}, 1000*60*30);

@@ -15,11 +15,11 @@ exports.getPosts = function(req, res, next) {
 };
 
 exports.createNewPost = function(req, res, next) {
-    Post.create(req.body, function(err) {
+    Post.create(req.body, function(err, post) {
         if(err) {
             next(err);
         }else{
-            res.status(201).end();
+            res.status(201).json(post);
         }
     });
 };
@@ -30,11 +30,11 @@ exports.updatePost = function(req, res, next) {
     newPost.body = req.body.body;
     newPost.author = req.body.author;
     newPost.image = req.body.image;
-    Post.findByIdAndUpdate(req.params.id, newPost, function(err) {
+    Post.findByIdAndUpdate(req.params.id, newPost, function(err, post) {
         if(err) {
             next(err);
         }else{
-            res.end();
+            res.json(post);
         }
     });
 };
